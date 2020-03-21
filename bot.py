@@ -97,6 +97,7 @@ def start_message(message):
         strx = strx.replace(":", "")
         strx = strx.replace("-", "")
         return strx
+        
 
     # скоринг
     for url in scoring_dict.keys():
