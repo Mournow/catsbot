@@ -90,9 +90,16 @@ def start_message(message):
     # общие результаты скоринга
     scoring_scores = []
 
+    def clear(str):
+        str = str.replace(" ", "")
+        str = str.replace(",", "")
+        str = str.replace(".", "")
+        str = str.replace(":", "")
+        str = str.replace("-", "")
+
     # скоринг
     for url in scoring_dict.keys():
-        score = similarity(scoring_dict[url]['meme_tag'], message.text)
+        score = similarity(clear(scoring_dict[url]['meme_tag']), clear(message.text))
         scoring_dict[url]['scoring'] = score
         scoring_scores.append(score)
 
