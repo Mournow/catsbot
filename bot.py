@@ -98,6 +98,7 @@ def start_message(message):
 
     # выберем 3 макс.
     scoring_scores.sort(reverse=True)
+    print(scoring_scores)
     max1 = scoring_scores[0]
     max2 = scoring_scores[1]
     max3 = scoring_scores[2]
