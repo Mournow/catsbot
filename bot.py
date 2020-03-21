@@ -2,6 +2,7 @@
 # import redis
 import os
 import telebot
+import difflib
 # import some_api_lib
 # import ...
 
@@ -23,9 +24,44 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['дайкота'])
 
 def start_message(message):
-    
-    img = open(os.path.join(os.path.abspath(os.curdir), 'cats/s7zN3CUtdPA.jpg'), 'rb')
 
-    bot.send_photo(message.chat.id, img, reply_to_message_id=message.message_id)
+    max_similarity = { 'url': "", 'score': 0 }
+
+    for url in scoring_dict.keys():
+        scoring = similarity(scoring_dict[url]['meme_tag'], message.text)
+
+        if scoring > max_similarity['score'] :
+            max_similarity['score'] = scoring
+            max_similarity['url'] = scoring_dict[url]
+
+    img = open(os.path.join(os.path.abspath(os.curdir), max_similarity['url']), 'rb')
+
+    bot.send_photo(message.chat.id, img, caption=max_similarity['score'], reply_to_message_id=message.message_id)
 
 bot.polling()
+
+
+scoring_dict = {
+    's7zN3CUtdPA.jpg' : {
+        'meme_tag' : 'здравствуйте, а вам не кажется что вы срочно должны пойти нахуй',
+        'situation' : ''
+    },
+    'HVVmlVL2CEg.jpg' : {
+        'meme_tag' : 'я вот посидел поныл и ничего не изменилось ахуеть блять',
+        'situation' : ''
+    },
+    'fc4incnslfctis8ft3top.jpg' : {
+        'meme_tag' : 'у нас есть только два союзника: цмок и кусь',
+        'situation' : ''
+    },
+    '4Yft9rapuUA.jpg' : {
+        'meme_tag' : '',
+        'situation' : 'плачет'
+    }
+}
+
+def similarity(s1, s2):
+  normalized1 = s1.lower()
+  normalized2 = s2.lower()
+  matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
+  return matcher.ratio()
