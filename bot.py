@@ -21,8 +21,10 @@ bot = telebot.TeleBot(token)
 
 
 @bot.message_handler(commands=['дайкота'])
+
 def start_message(message):
     img = open('cats\9bXQpgq8Ry4.jpg', 'rb')
+
     bot.send_photo(message.chat.id, img, reply_to_message_id=message.chat.id)
 
 bot.polling()
