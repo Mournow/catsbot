@@ -58,6 +58,7 @@ def start_message(message):
         if scoring > max_similarity['score'] :
             max_similarity['score'] = scoring
             max_similarity['url'] = url
+            
 
     path = os.path.join(os.path.abspath(os.curdir), max_similarity['url'])
     img = open(path, 'rb')
