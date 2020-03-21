@@ -23,7 +23,8 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['дайкота'])
 
 def start_message(message):
-    img = open('cats\s7zN3CUtdPA.jpg', 'rb')
+    
+    img = open(os.path.join(os.path.abspath(os.curdir), 'cats\\s7zN3CUtdPA.jpg'), 'rb')
 
     bot.send_photo(message.chat.id, img, reply_to_message_id=message.chat.id)
 
