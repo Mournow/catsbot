@@ -57,9 +57,10 @@ def start_message(message):
 
         if scoring > max_similarity['score'] :
             max_similarity['score'] = scoring
-            max_similarity['url'] = scoring_dict[url]
+            max_similarity['url'] = scoring_dict[url]['url']
 
-    img = open(os.path.join(os.path.abspath(os.curdir), max_similarity['url']), 'rb')
+    path = os.path.join(os.path.abspath(os.curdir), max_similarity['url'])
+    img = open(path, 'rb')
 
     bot.send_photo(message.chat.id, img, caption=max_similarity['score'], reply_to_message_id=message.message_id)
 
