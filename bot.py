@@ -90,12 +90,13 @@ def start_message(message):
     # общие результаты скоринга
     scoring_scores = []
 
-    def clear(str):
-        str = str.replace(" ", "")
-        str = str.replace(",", "")
-        str = str.replace(".", "")
-        str = str.replace(":", "")
-        str = str.replace("-", "")
+    def clear(strx):
+        strx = strx.replace(" ", "")
+        strx = strx.replace(",", "")
+        strx = strx.replace(".", "")
+        strx = strx.replace(":", "")
+        strx = strx.replace("-", "")
+        return strx
 
     # скоринг
     for url in scoring_dict.keys():
