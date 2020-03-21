@@ -25,6 +25,31 @@ bot = telebot.TeleBot(token)
 
 def start_message(message):
 
+    scoring_dict = {
+        's7zN3CUtdPA.jpg' : {
+            'meme_tag' : 'здравствуйте, а вам не кажется что вы срочно должны пойти нахуй',
+            'situation' : ''
+        },
+        'HVVmlVL2CEg.jpg' : {
+            'meme_tag' : 'я вот посидел поныл и ничего не изменилось ахуеть блять',
+            'situation' : ''
+        },
+        'fc4incnslfctis8ft3top.jpg' : {
+            'meme_tag' : 'у нас есть только два союзника: цмок и кусь',
+            'situation' : ''
+        },
+        '4Yft9rapuUA.jpg' : {
+            'meme_tag' : '',
+            'situation' : 'плачет'
+        }
+    }
+
+    def similarity(s1, s2):
+        normalized1 = s1.lower()
+        normalized2 = s2.lower()
+        matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
+        return matcher.ratio()
+
     max_similarity = { 'url': "", 'score': 0 }
 
     for url in scoring_dict.keys():
@@ -41,27 +66,3 @@ def start_message(message):
 bot.polling()
 
 
-scoring_dict = {
-    's7zN3CUtdPA.jpg' : {
-        'meme_tag' : 'здравствуйте, а вам не кажется что вы срочно должны пойти нахуй',
-        'situation' : ''
-    },
-    'HVVmlVL2CEg.jpg' : {
-        'meme_tag' : 'я вот посидел поныл и ничего не изменилось ахуеть блять',
-        'situation' : ''
-    },
-    'fc4incnslfctis8ft3top.jpg' : {
-        'meme_tag' : 'у нас есть только два союзника: цмок и кусь',
-        'situation' : ''
-    },
-    '4Yft9rapuUA.jpg' : {
-        'meme_tag' : '',
-        'situation' : 'плачет'
-    }
-}
-
-def similarity(s1, s2):
-  normalized1 = s1.lower()
-  normalized2 = s2.lower()
-  matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
-  return matcher.ratio()
