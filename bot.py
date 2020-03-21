@@ -19,8 +19,10 @@ bot = telebot.TeleBot(token)
 # some_api = some_api_lib.connect(some_api_token)
 #              ...
 
-@bot.message_handler(commands=['start'])
+
+@bot.message_handler(commands=['кусь'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
+    img = open('cats\\9bXQpgq8Ry4.jpg', 'rb')
+    bot.send_photo(message.chat.id, img, reply_to_message_id=message.chat.id)
 
 bot.polling()
