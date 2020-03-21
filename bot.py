@@ -26,21 +26,47 @@ bot = telebot.TeleBot(token)
 def start_message(message):
 
     scoring_dict = {
-        's7zN3CUtdPA.jpg' : {
-            'meme_tag' : 'здравствуйте, а вам не кажется что вы срочно должны пойти нахуй',
-            'situation' : ''
-        },
-        'HVVmlVL2CEg.jpg' : {
-            'meme_tag' : 'я вот посидел поныл и ничего не изменилось ахуеть блять',
-            'situation' : ''
-        },
-        'fc4incnslfctis8ft3top.jpg' : {
-            'meme_tag' : 'у нас есть только два союзника: цмок и кусь',
-            'situation' : ''
-        },
         '4Yft9rapuUA.jpg' : {
-            'meme_tag' : '',
-            'situation' : 'плачет'
+            'meme_tag' : 'оригинал'
+        },
+        'e4fbc411fd693f423f4f81b96238f2ee.jpg' : {
+            'meme_tag' : 'непонел'
+        },
+        '751926387eabb27cdef9c88ae9a39889.jpg' : {
+            'meme_tag' : 'хватет меня доводить пажалуста'
+        },
+        '147296140219221262.jpg' : {
+            'meme_tag' : 'зачем я это делал'
+        },
+        '4baf0a71fcbe040ac90ce8052cb9cd3e.jpg' : {
+            'meme_tag' : 'я не плачу это просто секундная грусть'
+        },
+        'f41daf45975abbec8385f5de77323913.jpg' : {
+            'meme_tag' : 'закрой пожалуйста свой ебальник и не перебивай меня'
+        },
+        'Lz0w4vMWYBE.jpg' : {
+            'meme_tag' : 'не повышай на меня буквы слыш'
+        },
+        'niuercfewvf.png' : {
+            'meme_tag' : 'рот свой замолчи'
+        },
+        'oichrjnkkem.jpg' : {
+            'meme_tag' : 'оригинал'
+        },
+        '83f48e1d1283f713eaf448a66bc6a7e8.jpg' : {
+            'meme_tag' : 'оригинал'
+        },
+        '9d7f64bd0c4a96b7725829bb7f705bc7.jpg' : {
+            'meme_tag' : 'оригинал'
+        },
+        'foto-plachushchego-kota-iz-memov-2.jpg' : {
+            'meme_tag' : 'оригинал'
+        },
+        '1577531719110948279.jpg' : {
+            'meme_tag' : 'помнишь, как ты в детстве любил плюшки? Я тебе еще напеку Ты только приезжай Хоть иногда'
+        },
+        '93c63f05ec545f3a55ee01415331f8c2.jpg' : {
+            'meme_tag' : 'только я жить не хочу'
         }
     }
 
@@ -50,20 +76,35 @@ def start_message(message):
         matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
         return matcher.ratio()
 
-    max_similarity = { 'url': "", 'score': 0 }
+    def send_cat(url):
+        path = os.path.join(os.path.abspath(os.curdir), "cats/" + url)
+        img = open(path, 'rb')
+
+        bot.send_photo(message.chat.id, img, caption="Держи котичка.", reply_to_message_id=message.message_id)
+
+    # общие результаты скоринга
+    scoring_scores = []
+
+    # скоринг
+    for url in scoring_dict.keys():
+        score = similarity(scoring_dict[url]['meme_tag'], message.text)
+        scoring_dict[url]['scoring'] = score
+        scoring_scores.append(score)
+
+    # выберем 3 макс.
+    scoring_scores.sort(reverse=True)
+    max1 = scoring_scores[0]
+    max2 = scoring_scores[1]
+    max3 = scoring_scores[2]
 
     for url in scoring_dict.keys():
-        scoring = similarity(scoring_dict[url]['meme_tag'], message.text)
+        if scoring_dict[url]['scoring'] == max1: max1 = url
+        if scoring_dict[url]['scoring'] == max2: max2 = url
+        if scoring_dict[url]['scoring'] == max3: max3 = url
 
-        if scoring > max_similarity['score'] :
-            max_similarity['score'] = scoring
-            max_similarity['url'] = url
-            
-
-    path = os.path.join(os.path.abspath(os.curdir), "cats/" + max_similarity['url'])
-    img = open(path, 'rb')
-
-    bot.send_photo(message.chat.id, img, caption=max_similarity['score'], reply_to_message_id=message.message_id)
+    send_cat(max1)
+    send_cat(max2)
+    send_cat(max3)
 
 bot.polling()
 
