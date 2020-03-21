@@ -102,6 +102,11 @@ def start_message(message):
     max2 = scoring_scores[1]
     max3 = scoring_scores[2]
 
+    if max1 == max2: max2 = ""
+    if max2 == max1: max1 = ""
+    if max1 == max3: max3 = ""
+    if max2 == max3: max2 = ""
+
     for url in scoring_dict.keys():
         if scoring_dict[url]['scoring'] == max1: max1 = url
         if scoring_dict[url]['scoring'] == max2: max2 = url
