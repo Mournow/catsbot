@@ -77,10 +77,15 @@ def start_message(message):
         return matcher.ratio()
 
     def send_cat(url):
-        path = os.path.join(os.path.abspath(os.curdir), "cats/" + url)
-        img = open(path, 'rb')
+        try:
+            path = os.path.join(os.path.abspath(os.curdir), "cats/" + url)
+            img = open(path, 'rb')
 
-        bot.send_photo(message.chat.id, img, caption="Держи котичка.", reply_to_message_id=message.message_id)
+            bot.send_photo(message.chat.id, img, caption="Держи котичка.", reply_to_message_id=message.message_id)
+        except FileNotFoundError:
+            print("Не могу найти " + url)
+        except: 
+            print("Другая ошибка.")
 
     # общие результаты скоринга
     scoring_scores = []
