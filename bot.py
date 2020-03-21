@@ -60,7 +60,7 @@ def start_message(message):
             max_similarity['url'] = url
             
 
-    path = os.path.join(os.path.abspath(os.curdir), max_similarity['url'])
+    path = os.path.join(os.path.abspath(os.curdir), "cats\\" + max_similarity['url'])
     img = open(path, 'rb')
 
     bot.send_photo(message.chat.id, img, caption=max_similarity['score'], reply_to_message_id=message.message_id)
