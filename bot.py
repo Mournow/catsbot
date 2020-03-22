@@ -76,15 +76,42 @@ def start_message(message):
         },
         'IeVfGd5PNCM.jpg' : {
             'meme_tag' : 'дорогой дневник ебись оно все к хуям'
+        },
+        'PhTuAKGyobw.jpg' : {
+            'meme_tag' : 'че ты на меня кричишь чепуршило кричала у тебя еще не выросла угомонись или тебя моя биполярка угомонит'
+        },
+        'HAYo-83F1YY.jpg' : {
+            'meme_tag' : 'все я обидевся'
+        },
+        'MpFv4o0GNQQ.jpg' : {
+            'meme_tag' : 'ты че быканул бля'
+        },
+        'psgXZ55wLZU.jpg' : {
+            'meme_tag' : 'эти ваши так называемые уроки я в рот ебал'
+        },
+        'nJ4vx3KDYJ0.jpg' : {
+            'meme_tag' : 'мам дай денюшку на пива'
+        },
+        'kpcfnqIIgHQ.jpg' : {
+            'meme_tag' : 'грусть'
+        },
+        'jmUjXrQP_rU.jpg' : {
+            'meme_tag' : 'капец'
+        },
+        's8PurQ6C3lI.jpg' : {
+            'meme_tag' : 'полета счастливая жизнь'
+        },
+        'Wr7Pcvu_CpY.jpg' : {
+            'meme_tag' : 'ща кофейку бахну и норм думаю будет'
         }
     }
 
     # анализ через difflib
-    def similarity(s1, s2):
-        normalized1 = s1.lower()
-        normalized2 = s2.lower()
-        matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
-        return matcher.ratio()
+    # def similarity(s1, s2):
+    #     normalized1 = s1.lower()
+    #     normalized2 = s2.lower()
+    #     matcher = difflib.SequenceMatcher(None, normalized1, normalized2)
+    #     return matcher.ratio()
 
     # коэффициент танимото
     def tanimoto(s1, s2):
@@ -127,7 +154,6 @@ def start_message(message):
 
     # выберем 3 макс.
     scoring_scores.sort(reverse=True)
-    print(scoring_scores)
     max1 = scoring_scores[0]
     max2 = scoring_scores[1]
     max3 = scoring_scores[2]
@@ -143,8 +169,11 @@ def start_message(message):
         if scoring_dict[url]['scoring'] == max3: max3 = url
 
     send_cat(max1)
+    print(max1)
     send_cat(max2)
+    print(max2)
     send_cat(max3)
+    print(max3)
 
 bot.polling()
 
