@@ -67,6 +67,15 @@ def start_message(message):
         },
         '93c63f05ec545f3a55ee01415331f8c2.jpg' : {
             'meme_tag' : 'только я жить не хочу'
+        },
+        'uJLN5Cm3sD0.jpg' : {
+            'meme_tag' : 'идите в пизду никакого видео чата я сплю'
+        },
+        'KrsYdtW-dLE.jpg' : {
+            'meme_tag' : 'почемуб ты мне не пишеш'
+        },
+        'IeVfGd5PNCM.jpg' : {
+            'meme_tag' : 'дорогой дневник ебись оно все к хуям'
         }
     }
 
