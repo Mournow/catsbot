@@ -1,0 +1,3 @@
+
+
+heroku logs --tail   
